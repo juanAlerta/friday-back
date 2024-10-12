@@ -1,32 +1,13 @@
-# Modelo de lenguaje
 
-from langchain import PromptTemplate, LLMChain
-from langchain.llms import GPT4All
+#  Trying to run a local LLM                               #
+#  ------------------------------------------------------- #
+# ollama in terminal to start the model                    #
+# ollama pull llama3.1:8b localhost:11434                  #
+# https://python.langchain.com/docs/how_to/local_llms/     #
+# -------------------------------------------------------- #
 
-# Specify model weights path
-PATH='./nous-hermes-13b.ggmlv3.q4_0.bin'
+from langchain_ollama import OllamaLLM
 
-# Create LLM Class
-llm = GPT4All(model=PATH, verbose=True)
+llm = OllamaLLM(model="llama3.1:8b")
 
-# Create a prompt template
-prompt = PromptTemplate(
-    input_variables=['instruction', 'input', 'response'],
-    template="""
-    ### Instruction:
-    {instruction}
-    ### Input:
-    {input}
-    ### Response:
-    {response}
-    """ )
-
-chain = LLMChain(prompt=prompt, llm=llm)
-
-# Run the prompt
-# I used a childen story to test https://cuentosparadormir.com/infantiles/cuento/barba-flamenco-y-el-recortador-de-cuentos
-# its about 783 words long!
-chain.run(instruction="""Resume esta historia, hazlo en español""",
-input="""[...story content...]""",
-response='A: ')
-
+llm.invoke("The first man on the moon was ...")

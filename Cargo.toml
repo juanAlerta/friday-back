@@ -3,6 +3,17 @@ name = "real-back"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+# https://dev.to/alexandrughinea/building-a-local-and-private-llm-server-in-rust-32kp
 
 [dependencies]
+actix-cors = "0.7.0"
+actix-web = { version = "4.9.0", optional = true, features = ["openssl"] }
+actix-web-httpauth = "0.8.2"
+dotenvs = "0.1.0"
+llm = "0.1.1"
+openssl = "0.10.66"
+rand = "0.8.5"
+serde = { version = "1.0.210", features = ["derive"] }
+serde_json = "1.0.128"
+tokio = { version = "1", features = ["full"] }  
+tokio-macros = "2.4.0"

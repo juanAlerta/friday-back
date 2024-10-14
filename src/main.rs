@@ -1,4 +1,4 @@
-mod pub server_struct;
+pub mod server_struct::Config;
 
 use actix_cors;
 use actix_web_httpauth;
@@ -12,13 +12,14 @@ use tokio;
 use tokio_macros;
 
 
-#[actix_web::main]  
-#[cfg(feature = "server")]  
+ 
 
 fn main() {
     tokio::run(fetch());
 }
 
+#[actix_web::main]  
+#[cfg(feature = "server")] 
 async fn fetch() -> std::io::Result<()> {  
     let config: Config = Config::init();  
     let model_path = PathBuf::from(&config.llm_model);  
